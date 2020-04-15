@@ -26,7 +26,7 @@
                 <td><?= $dt['nama'];?></td>
                 <td><?= $dt['alamat'];?></td>
                 <td><?= $dt['telepon'];?></td>
-                <td><a href="/anggota/edit/<?= $dt['id'];?>">Edit</a> || <a href="/anggota/delete/<?= $dt['id'];?>">Delete</a></td>
+                <td><a href="<?= base_url(); ?>/anggota/edit/<?= $dt['id'];?>">Edit</a> || <a href="<?= base_url(); ?>/anggota/delete/<?= $dt['id'];?>">Delete</a></td>
             </tr>
         <?php $no++; ?>
         <?php endforeach;?>
