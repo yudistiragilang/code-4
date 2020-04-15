@@ -34,7 +34,7 @@ class Anggota extends Controller
             'telepon' => $this->request->getPost('telepon'),
         );
         $model->saveAnggota($data);
-        return redirect()->to('/anggota');
+        return redirect()->to(base_url('/anggota'));
     }
 
     public function edit($id)
@@ -55,14 +55,14 @@ class Anggota extends Controller
             'telepon' => $this->request->getPost('telepon'),
         );
         $model->updateAnggota($data, $id);
-        return redirect()->to('/anggota');
+        return redirect()->to(base_url('/anggota'));
     }
 	
 	public function delete($id)
     {
         $model = new Anggota_model();
         $model->deleteAnggota($id);
-        return redirect()->to('/anggota');
+        return redirect()->to(base_url('/anggota'));
     }
 
 }

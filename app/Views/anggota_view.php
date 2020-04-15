@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href="<?php echo base_url(); ?>/public/favicon.ico"/>
     <title><?= $title; ?></title>
 </head>
 <body> 
-	<a href="/anggota/add_new">Add New</a>
+	<a href="<?php echo base_url(); ?>/anggota/add_new">Add New</a>
     <table border="1" cellpadding="10px">
         <thead>
             <tr>
