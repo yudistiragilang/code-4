@@ -95,9 +95,78 @@
             <h1><?= $title; ?></h1>
           </div>
           <div class="row">
-            
+
+            <div class="col-md-2 offset-md-10">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#addData">Tambah Data</button>
+            </div>
+            <div class="section-title">Users</div>
+            <div class="table-responsive">
+              <table class="table table-striped table-md">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Alamat</th>
+                    <th>Telepon</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  <?php $no = 1; ?>
+                  <?php foreach ($users as $user) { ?>
+                  <tr>
+                    <td><?php echo $no; ?></td>
+                    <td><?php echo $user['nama']; ?></td>
+                    <td><?php echo $user['email']; ?></td>
+                    <td><?php echo $user['alamat']; ?></td>
+                    <td><?php echo $user['telepon']; ?></td>
+                    <td>
+                      <?php 
+                        if($user['inactive'] == 0){
+                          echo '<div class="badge badge-success">Active</div>';
+                        }else{
+                          echo '<div class="badge badge-danger">Inactive</div>';
+                        } 
+                      ?>  
+                    </td>
+                    <td>
+                      <a href="#" class="btn btn-outline-info"><i class="fas fa-edit"></i></a>
+                      <a href="<?= base_url(); ?>/Users_maintenance/delete/<?= $user['id'];?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                  <?php $no++; ?>
+                  <?php } ?>
+                
+                </tbody>
+              </table>
+            </div>
+
           </div>
         </section>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="addData">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Tambah Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Modal body text goes here.</p>
+              </div>
+              <div class="modal-footer bg-whitesmoke br">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
       
       <footer class="main-footer">

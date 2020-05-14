@@ -17,7 +17,7 @@ class Users_maintenance extends Controller
     {
         $model = new User_model();
         $data['title'] = "User Maintenance";
-        $data['User'] = $model->getUser();
+        $data['users'] = $model->getUser();
         echo view('maintenance/user', $data);
     }
  
@@ -58,7 +58,7 @@ class Users_maintenance extends Controller
     {
         $model = new User_model();
         $model->deleteUser($id);
-        return redirect()->to(base_url('/user'));
+        return redirect()->to(base_url('/maintenance-users'));
     }
 
 }
