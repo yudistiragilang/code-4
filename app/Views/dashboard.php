@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>General Dashboard &mdash; Stisla</title>
+  <title><?php echo $title; ?></title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -49,7 +49,7 @@
       <div class="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="<?php echo base_url(); ?>">Stisla</a>
+            <a href="<?php echo base_url(); ?>">K-Means</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">St</a>
@@ -92,17 +92,17 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Dashboard</h1>
+            <h1><?php echo $title; ?></h1>
           </div>
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                   <i class="far fa-user"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Admin</h4>
+                    <h4>Users</h4>
                   </div>
                   <div class="card-body">
                     10
@@ -110,14 +110,29 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1">
+                <div class="card-icon bg-danger">
+                  <i class="far fa-users"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Members</h4>
+                  </div>
+                  <div class="card-body">
+                    42
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-danger">
                   <i class="far fa-newspaper"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>News</h4>
+                    <h4>Products</h4>
                   </div>
                   <div class="card-body">
                     42

@@ -20,6 +20,7 @@
 
 <body>
   <div id="app">
+    
     <div class="main-wrapper">
       <div class="navbar-bg"></div>
       <nav class="navbar navbar-expand-lg main-navbar justify-content-end">
@@ -47,7 +48,7 @@
       <div class="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="<?php echo base_url(); ?>">Stisla</a>
+            <a href="<?php echo base_url(); ?>">K-Means</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">St</a>
