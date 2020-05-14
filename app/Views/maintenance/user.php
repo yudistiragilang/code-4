@@ -57,7 +57,7 @@
               <li class="menu-header">Menu</li>
               
               <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Transaction</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-tasks"></i><span>Transaction</span></a>
                 <ul class="dropdown-menu">
                   <li class="active"><a class="nav-link" href="<?php echo base_url(); ?>/Users_transactions">User</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/Members_transactions">Member</a></li>
@@ -66,7 +66,7 @@
               </li>
               
               <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Inquiry</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-book-reader"></i><span>Inquiry</span></a>
                 <ul class="dropdown-menu">
                   <li class="active"><a class="nav-link" href="<?php echo base_url(); ?>/Users_inquiries">User</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/Members_inquiries">Member</a></li>
@@ -75,7 +75,7 @@
               </li>
               
               <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Maintenance</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-cogs"></i><span>Maintenance</span></a>
                 <ul class="dropdown-menu">
                   <li class="active"><a class="nav-link" href="<?php echo base_url(); ?>/Users_maintenance">User</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/Members_maintenance">Member</a></li>
