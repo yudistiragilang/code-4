@@ -113,6 +113,7 @@
                   <tr>
                     <th>#</th>
                     <th>Username</th>
+                    <th>Role</th>
                     <th>Created date</th>
                     <th>Last visit</th>
                     <th>Active</th>
@@ -126,6 +127,7 @@
                   <tr>
                     <td><?php echo $no; ?></td>
                     <td><?php echo $user['username']; ?></td>
+                    <td><?php echo $user['role']; ?></td>
                     <td><?php echo $user['created_date']; ?></td>
                     <td><?php echo $user['last_visit']; ?></td>
                     <td>
@@ -166,24 +168,17 @@
                   </div>
                   <div class="modal-body">
                       <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Username . .">
-                      </div>
-                      <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat . .">
-                      </div>
-                      <div class="form-group">
-                        <label for="telepon">Telepon</label>
-                        <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Telepon . .">
-                      </div>
-                      <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Email . .">
-                      </div>
-                      <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username . .">
+                      </div>
+                      <div class="form-group">
+                        <label>Role</label>
+                        <select class="form-control form-control-sm" name="role">
+                          <option>Pilih Role</option>
+                          <?php foreach ( $roles as $dt) : ?>           
+                          <option value="<?= $dt['id'] ;?>"> <?= $dt['role'] ;?> </option>
+                          <?php endforeach; ?>
+                        </select>
                       </div>
                       <div class="form-group">
                         <label for="password">Password</label>
@@ -216,20 +211,28 @@
                       <input type="text" hidden="hidden" class="form-control" id="id" name="id" value="<?= $editUser['id']; ?>">
                       <div class="form-group">
                         <label for="nama">Username</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $editUser['username']; ?>">
+                        <input type="text" class="form-control" id="username" name="username" value="<?= $editUser['username']; ?>">
                       </div>
                       <div class="form-group">
-                        <label for="alamat">Created Date</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $editUser['created_date']; ?>">
-                      </div>
-                      <div class="form-group">
-                        <label for="telepon">Last Visit</label>
-                        <input type="text" class="form-control" id="telepon" name="telepon" value="<?= $editUser['last_visit']; ?>">
+                        <label>Role</label>
+                        <select class="form-control form-control-sm" name="role">
+                          <option>Pilih Role</option>
+                          <?php foreach ( $roles as $dt) : ?>
+                          <?php
+                            if ($editUser['role_id']==$dt['id']) {
+                              $select="selected";
+                            }else{
+                              $select="";
+                            } 
+                          ?>
+                          <option <?= $select; ?> value="<?= $dt['id'] ;?>"> <?= $dt['role'] ;?> </option>
+                          <?php endforeach; ?>
+                        </select>
                       </div>
                   </div>
                   <div class="modal-footer bg-whitesmoke br">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="submit" class="btn btn-primary">Update</button> -->
+                    <button type="submit" class="btn btn-primary">Update</button>
                   </div>
               </div>
             </form>

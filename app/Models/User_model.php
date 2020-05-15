@@ -17,7 +17,20 @@ class User_model extends Model
     public function getUser($id = false)
     {
         if($id === false){
-            return $this->findAll();
+            
+            $db = \Config\Database::connect();
+            $builder = $db->table('users');
+            $builder->select('users.id,
+                              users.username,
+                              users.role_id,
+                              roles.role AS role,
+                              users.created_date,
+                              users.last_visit,
+                              users.inactive');
+            $builder->join('roles', 'roles.id = users.role_id');
+            $data = $builder->get()->getResultArray();
+            return $data;
+        
         }else{
             return $this->getWhere(['id' => $id]);
         }
