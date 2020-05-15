@@ -24,13 +24,14 @@ class Users_maintenance extends Controller
     public function save()
     {
         $model = new User_model();
+        $hashPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
         $data = array(
             'nama'  => $this->request->getPost('nama'),
             'alamat' => $this->request->getPost('alamat'),
             'telepon' => $this->request->getPost('telepon'),
             'email' => $this->request->getPost('email'),
             'username' => $this->request->getPost('username'),
-            'password' => $this->request->getPost('password'),
+            'password' => $hashPassword,
         );
         $model->saveUser($data);
         return redirect()->to(base_url('/maintenance-users'));
