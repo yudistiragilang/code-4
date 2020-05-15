@@ -28,17 +28,12 @@ class Users_maintenance extends Controller
             'nama'  => $this->request->getPost('nama'),
             'alamat' => $this->request->getPost('alamat'),
             'telepon' => $this->request->getPost('telepon'),
+            'email' => $this->request->getPost('email'),
+            'username' => $this->request->getPost('username'),
+            'password' => $this->request->getPost('password'),
         );
         $model->saveUser($data);
-        return redirect()->to(base_url('/user'));
-    }
-
-    public function edit($id)
-    {
-        $model = new User_model();
-        $data['title'] = "Ubah User";
-        $data['User'] = $model->getUser($id)->getRow();
-        echo view('user', $data);
+        return redirect()->to(base_url('/maintenance-users'));
     }
  
     public function update()
@@ -49,9 +44,10 @@ class Users_maintenance extends Controller
             'nama'  => $this->request->getPost('nama'),
             'alamat' => $this->request->getPost('alamat'),
             'telepon' => $this->request->getPost('telepon'),
+            'email' => $this->request->getPost('email'),
         );
         $model->updateUser($data, $id);
-        return redirect()->to(base_url('/user'));
+        return redirect()->to(base_url('/maintenance-users'));
     }
 	
 	public function delete($id)

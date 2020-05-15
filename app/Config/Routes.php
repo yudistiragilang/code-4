@@ -33,6 +33,8 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 
 $routes->get('/maintenance-users', 'Users_maintenance::index');
+$routes->add('/maintenance-users-add', 'Users_maintenance::save');
+$routes->add('/maintenance-users-edit', 'Users_maintenance::update');
 $routes->add('/maintenance-users-delete/(:num)', 'Users_maintenance::delete/$1');
 
 $routes->get('/maintenance-members', 'Members_maintenance::index');

@@ -139,8 +139,8 @@
                       ?>  
                     </td>
                     <td>
-                      <a href="#" class="btn btn-outline-info"><i class="fas fa-edit"></i></a>
-                      <a href="<?= base_url(); ?>/maintenance-users-delete/<?= $user['id'];?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
+                      <a href="#" class="btn btn-outline-info" data-toggle="modal" data-target="#editData<?= $user['id'];?>"><i class="fas fa-edit"></i></a>
+                      <a onclick="return hapus()" href="<?= base_url(); ?>/maintenance-users-delete/<?= $user['id'];?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
                   <?php $no++; ?>
@@ -153,25 +153,96 @@
           </div>
         </section>
 
+
+        <!-- modal tambah -->
         <div class="modal fade" tabindex="-1" role="dialog" id="addData">
           <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Tambah Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+            <form action="<?php echo base_url();?>/maintenance-users-add" method="POST">
+              <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Tambah Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Username . .">
+                      </div>
+                      <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat . .">
+                      </div>
+                      <div class="form-group">
+                        <label for="telepon">Telepon</label>
+                        <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Telepon . .">
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email . .">
+                      </div>
+                      <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username . .">
+                      </div>
+                      <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password . .">
+                      </div>
+                  </div>
+                  <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
               </div>
-              <div class="modal-body">
-                <p>Modal body text goes here.</p>
-              </div>
-              <div class="modal-footer bg-whitesmoke br">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
+        <!-- modal tambah -->
+
+        <!-- modal edit -->
+        <?php foreach ( $users as $editUser) : ?>
+        <div class="modal fade" tabindex="-1" role="dialog" id="editData<?= $editUser['id'];?>">
+          <div class="modal-dialog" role="document">
+            <form action="<?php echo base_url();?>/maintenance-users-edit" method="POST">
+              <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <input type="text" hidden="hidden" class="form-control" id="id" name="id" value="<?= $editUser['id']; ?>">
+                      <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $editUser['nama']; ?>">
+                      </div>
+                      <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $editUser['alamat']; ?>">
+                      </div>
+                      <div class="form-group">
+                        <label for="telepon">Telepon</label>
+                        <input type="text" class="form-control" id="telepon" name="telepon" value="<?= $editUser['telepon']; ?>">
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" value="<?= $editUser['email']; ?>">
+                      </div>
+                  </div>
+                  <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <?php endforeach; ?>
+        <!-- modal edit -->
+
 
       </div>
       
@@ -183,6 +254,14 @@
     
     </div>
   </div>
+
+  <script type="text/javascript" language="JavaScript">
+    function hapus(){
+      takon = confirm("Anda Yakin Akan Menghapus Data ?");
+        if (takon == true) return true;
+        else return false;
+        }
+  </script>
 
   <!-- General JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
