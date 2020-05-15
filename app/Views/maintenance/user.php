@@ -140,7 +140,7 @@
                     </td>
                     <td>
                       <a href="#" class="btn btn-outline-info"><i class="fas fa-edit"></i></a>
-                      <a href="<?= base_url(); ?>/Users_maintenance/delete/<?= $user['id'];?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
+                      <a href="<?= base_url(); ?>/maintenance-users-delete/<?= $user['id'];?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
                   <?php $no++; ?>
