@@ -32,13 +32,25 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('/maintenance-roles', 'Roles_maintenance::index');
+$routes->add('/maintenance-roles-add', 'Roles_maintenance::save');
+$routes->add('/maintenance-roles-edit', 'Roles_maintenance::update');
+$routes->add('/maintenance-roles-delete/(:num)', 'Roles_maintenance::delete/$1');
+
 $routes->get('/maintenance-users', 'Users_maintenance::index');
 $routes->add('/maintenance-users-add', 'Users_maintenance::save');
 $routes->add('/maintenance-users-edit', 'Users_maintenance::update');
 $routes->add('/maintenance-users-delete/(:num)', 'Users_maintenance::delete/$1');
 
 $routes->get('/maintenance-members', 'Members_maintenance::index');
+$routes->add('/maintenance-members-add', 'Members_maintenance::save');
+$routes->add('/maintenance-members-edit', 'Members_maintenance::update');
+$routes->add('/maintenance-members-delete/(:num)', 'Members_maintenance::delete/$1');
+
 $routes->get('/maintenance-products', 'Products_maintenance::index');
+$routes->add('/maintenance-products-add', 'Products_maintenance::save');
+$routes->add('/maintenance-products-edit', 'Products_maintenance::update');
+$routes->add('/maintenance-products-delete/(:num)', 'Products_maintenance::delete/$1');
 
 $routes->get('/inquiry-users', 'Users_inquiry::index');
 $routes->get('/inquiry-members', 'Members_inquiry::index');

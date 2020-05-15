@@ -10,7 +10,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\User_model;
 
-class Users_maintenance extends Controller
+class Members_maintenance extends Controller
 {
 	
     public function index()
@@ -26,6 +26,10 @@ class Users_maintenance extends Controller
         $model = new User_model();
         $hashPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
         $data = array(
+            'nama'  => $this->request->getPost('nama'),
+            'alamat' => $this->request->getPost('alamat'),
+            'telepon' => $this->request->getPost('telepon'),
+            'email' => $this->request->getPost('email'),
             'username' => $this->request->getPost('username'),
             'password' => $hashPassword,
         );

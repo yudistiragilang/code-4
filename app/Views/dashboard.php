@@ -66,7 +66,7 @@
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-tasks"></i><span>Transaction</span></a>
                 <ul class="dropdown-menu">
-                  <li class="active"><a class="nav-link" href="<?php echo base_url(); ?>/transaction-users">User</a></li>
+                  <li><a class="nav-link" href="<?php echo base_url(); ?>/transaction-users">User</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/transaction-members">Member</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/transaction-products">Produk</a></li>
                 </ul>
@@ -75,7 +75,7 @@
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-book-reader"></i><span>Inquiry</span></a>
                 <ul class="dropdown-menu">
-                  <li class="active"><a class="nav-link" href="<?php echo base_url(); ?>/inquiry-users">User</a></li>
+                  <li><a class="nav-link" href="<?php echo base_url(); ?>/inquiry-users">User</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/inquiry-members">Member</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/inquiry-products">Produk</a></li>
                 </ul>
@@ -84,7 +84,8 @@
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-cogs"></i><span>Maintenance</span></a>
                 <ul class="dropdown-menu">
-                  <li class="active"><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-users">User</a></li>
+                  <li><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-roles">Role</a></li>
+                  <li><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-users">User</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-members">Member</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-products">Produk</a></li>
                 </ul>

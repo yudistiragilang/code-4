@@ -30,7 +30,7 @@
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
           </ul>
         </div>
-
+        
         <ul class="navbar-nav navbar-right">
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             <img alt="image" src="<?php echo base_url(); ?>/public/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
@@ -66,7 +66,7 @@
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-tasks"></i><span>Transaction</span></a>
                 <ul class="dropdown-menu">
-                  <li><a class="nav-link" href="<?php echo base_url(); ?>/transaction-users">User</a></li>
+                  <li><a class="nav-link" href="<?php echo base_url(); ?>/transaction-roles">role</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/transaction-members">Member</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/transaction-products">Produk</a></li>
                 </ul>
@@ -75,7 +75,7 @@
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-book-reader"></i><span>Inquiry</span></a>
                 <ul class="dropdown-menu">
-                  <li><a class="nav-link" href="<?php echo base_url(); ?>/inquiry-users">User</a></li>
+                  <li><a class="nav-link" href="<?php echo base_url(); ?>/inquiry-roles">role</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/inquiry-members">Member</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/inquiry-products">Produk</a></li>
                 </ul>
@@ -84,8 +84,8 @@
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-cogs"></i><span>Maintenance</span></a>
                 <ul class="dropdown-menu">
-                  <li><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-roles">Role</a></li>
-                  <li class="active"><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-users">User</a></li>
+                  <li class="active"><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-roles">Role</a></li>
+                  <li><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-roles">role</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-members">Member</a></li>
                   <li><a class="nav-link" href="<?php echo base_url(); ?>/maintenance-products">Produk</a></li>
                 </ul>
@@ -104,42 +104,30 @@
           <div class="row">
 
             <div class="col-md-2 offset-md-10">
-              <button class="btn btn-primary" data-toggle="modal" data-target="#addData">Tambah Data</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#addDataRole">Tambah Data</button>
             </div>
-            <div class="section-title">Users</div>
+            <div class="section-title">Roles</div>
             <div class="table-responsive">
               <table class="table table-striped table-md">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Username</th>
+                    <th>Role</th>
                     <th>Created date</th>
-                    <th>Last visit</th>
-                    <th>Active</th>
                     <th></th>
                   </tr>
                 </thead>
                 
                 <tbody>
                   <?php $no = 1; ?>
-                  <?php foreach ($users as $user) { ?>
+                  <?php foreach ($roles as $role) { ?>
                   <tr>
                     <td><?php echo $no; ?></td>
-                    <td><?php echo $user['username']; ?></td>
-                    <td><?php echo $user['created_date']; ?></td>
-                    <td><?php echo $user['last_visit']; ?></td>
+                    <td><?php echo $role['role']; ?></td>
+                    <td><?php echo $role['created_date']; ?></td>
                     <td>
-                      <?php 
-                        if($user['inactive'] == 0){
-                          echo '<div class="badge badge-success">Active</div>';
-                        }else{
-                          echo '<div class="badge badge-danger">Inactive</div>';
-                        } 
-                      ?>  
-                    </td>
-                    <td>
-                      <a href="#" class="btn btn-outline-info" data-toggle="modal" data-target="#editData<?= $user['id'];?>"><i class="fas fa-edit"></i></a>
-                      <a onclick="return hapus()" href="<?= base_url(); ?>/maintenance-users-delete/<?= $user['id'];?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
+                      <a href="#" class="btn btn-outline-info" data-toggle="modal" data-target="#editDataRole<?= $role['id'];?>"><i class="fas fa-edit"></i></a>
+                      <a onclick="return hapus()" href="<?= base_url(); ?>/maintenance-roles-delete/<?= $role['id'];?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
                   <?php $no++; ?>
@@ -154,9 +142,9 @@
 
 
         <!-- modal tambah -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="addData">
+        <div class="modal fade" tabindex="-1" role="dialog" id="addDataRole">
           <div class="modal-dialog" role="document">
-            <form action="<?php echo base_url();?>/maintenance-users-add" method="POST">
+            <form action="<?php echo base_url();?>/maintenance-roles-add" method="POST">
               <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">Tambah Data</h5>
@@ -166,28 +154,8 @@
                   </div>
                   <div class="modal-body">
                       <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Username . .">
-                      </div>
-                      <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat . .">
-                      </div>
-                      <div class="form-group">
-                        <label for="telepon">Telepon</label>
-                        <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Telepon . .">
-                      </div>
-                      <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Email . .">
-                      </div>
-                      <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username . .">
-                      </div>
-                      <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password . .">
+                        <label for="roles">Role</label>
+                        <input type="text" class="form-control" id="roles" name="roles" placeholder="Role . .">
                       </div>
                   </div>
                   <div class="modal-footer bg-whitesmoke br">
@@ -201,10 +169,10 @@
         <!-- modal tambah -->
 
         <!-- modal edit -->
-        <?php foreach ( $users as $editUser) : ?>
-        <div class="modal fade" tabindex="-1" role="dialog" id="editData<?= $editUser['id'];?>">
+        <?php foreach ( $roles as $editrole) : ?>
+        <div class="modal fade" tabindex="-1" role="dialog" id="editDataRole<?= $editrole['id'];?>">
           <div class="modal-dialog" role="document">
-            <form action="<?php echo base_url();?>/maintenance-users-edit" method="POST">
+            <form action="<?php echo base_url();?>/maintenance-roles-edit" method="POST">
               <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">Edit Data</h5>
@@ -213,23 +181,15 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                      <input type="text" hidden="hidden" class="form-control" id="id" name="id" value="<?= $editUser['id']; ?>">
+                      <input type="text" hidden="hidden" class="form-control" id="id" name="id" value="<?= $editrole['id']; ?>">
                       <div class="form-group">
-                        <label for="nama">Username</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $editUser['username']; ?>">
-                      </div>
-                      <div class="form-group">
-                        <label for="alamat">Created Date</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $editUser['created_date']; ?>">
-                      </div>
-                      <div class="form-group">
-                        <label for="telepon">Last Visit</label>
-                        <input type="text" class="form-control" id="telepon" name="telepon" value="<?= $editUser['last_visit']; ?>">
+                        <label for="roles">Role</label>
+                        <input type="text" class="form-control" id="roles" name="roles" value="<?= $editrole['role']; ?>">
                       </div>
                   </div>
                   <div class="modal-footer bg-whitesmoke br">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="submit" class="btn btn-primary">Update</button> -->
+                    <button type="submit" class="btn btn-primary">Update</button>
                   </div>
               </div>
             </form>
