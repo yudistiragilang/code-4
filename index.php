@@ -44,3 +44,4 @@ $app = require rtrim($paths->systemDirectory, '/ ') . '/bootstrap.php';
  * up the engines and make this app do its thang.
  */
 $app->run();
+date_default_timezone_set("Asia/Jakarta");
