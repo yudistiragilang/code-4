@@ -12,30 +12,38 @@ use CodeIgniter\Model;
 class Member_model extends Model
 {
     
-    protected $table = 'users';
+    protected $table = 'members';
      
-    public function getUser($id = false)
+    public function getMember($id = false)
     {
         if($id === false){
-            return $this->findAll();
+            // return $this->findAll();
+
+            $db = \Config\Database::connect();
+            $builder = $db->table('members');
+            $builder->select('members.*, users.username AS username');
+            $builder->join('users', 'users.id = members.user_id');
+            $data = $builder->get()->getResultArray();
+            return $data;
+
         }else{
             return $this->getWhere(['id' => $id]);
         }
     }
 
-    public function saveUser($data)
+    public function saveMember($data)
     {
         $query = $this->db->table($this->table)->insert($data);
         return $query;
     }
 
-    public function updateUser($data, $id)
+    public function updateMember($data, $id)
     {
         $query = $this->db->table($this->table)->update($data, array('id' => $id));
         return $query;
     }
 
-    public function deleteUser($id)
+    public function deleteMember($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;

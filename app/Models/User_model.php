@@ -36,6 +36,16 @@ class User_model extends Model
         }
     }
 
+    public function getUserCombo($id = false)
+    {
+            
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('*');
+        $data = $builder->get()->getResultArray();
+        return $data;
+    }
+
     public function saveUser($data)
     {
         $query = $this->db->table($this->table)->insert($data);
