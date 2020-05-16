@@ -58,7 +58,7 @@
             <a href="<?php echo base_url(); ?>">K-Means</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">KM</a>
           </div>
           <ul class="sidebar-menu">
               <li class="menu-header">Menu</li>
