@@ -63,6 +63,16 @@ class User_model extends Model
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
+
+    public function cekRolesUsed($id_role)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('*');
+        $builder->where('role_id', $id_role);
+        $data = $builder->countAllResults();
+        return $data;
+    }
  
 }
 

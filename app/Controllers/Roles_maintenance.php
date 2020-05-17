@@ -9,6 +9,7 @@
 namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\Role_model;
+use App\Models\User_model;
 
 class Roles_maintenance extends Controller
 {
@@ -45,9 +46,32 @@ class Roles_maintenance extends Controller
 	
 	public function delete($id)
     {
-        $model = new Role_model();
-        $model->deleteRole($id);
-        return redirect()->to(base_url('/maintenance-roles'));
+        $usr = new User_model();
+        $dataUser = $usr->cekRolesUsed($id);
+
+        if($dataUser > 0){
+            
+            $session = \Config\Services::session($config);
+            $session->setFlashdata('gagal', '
+                <div class="alert alert-danger alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    This is a danger alert.
+                  </div>
+                </div>
+                ');
+            return redirect()->to(base_url('/maintenance-roles'));
+
+        }else{
+            
+            $model = new Role_model();
+            $model->deleteRole($id);
+            return redirect()->to(base_url('/maintenance-roles'));
+        
+        }
+        
     }
 
 }

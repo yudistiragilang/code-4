@@ -103,6 +103,14 @@
           </div>
           <div class="row">
 
+            <div class="row">
+              <div>
+                <?php 
+                  echo $this->session->getFlashdata('gagal'); 
+                ?>
+              </div>
+            </div>
+
             <div class="col-md-2 offset-md-10">
               <button class="btn btn-primary" data-toggle="modal" data-target="#addDataRole">Tambah Data</button>
             </div>
