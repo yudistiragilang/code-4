@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/public/assets/css/style.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/public/assets/css/components.css">
   <link rel="shortcut icon" type="image/png" href="<?php echo base_url(); ?>/public/favicon.ico"/>
+
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/public/assets/modules/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -106,7 +108,12 @@
             <div class="row">
               <div>
                 <?php 
-                  echo $this->session->getFlashdata('gagal'); 
+                /* if(session()->getFlashdata('gagal')) {
+                  echo session()->getFlashdata('gagal');
+                }
+                if(session()->getFlashdata('sukses')) {
+                  echo session()->getFlashdata('sukses');
+                } */
                 ?>
               </div>
             </div>
@@ -236,6 +243,48 @@
 
   <!-- Template JS File -->
   <script src="<?php echo base_url(); ?>/public/assets/js/scripts.js"></script>
+
+  <!-- sweetalert -->
+  <script src="<?php echo base_url(); ?>/public/assets/modules/sweetalert2/sweetalert2.min.js"></script>
+
+  <?php if (session()->getFlashdata('sukses')): ?>
+  <script>
+  $(document).ready(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: '<?php echo session()->getFlashdata('sukses') ?>'
+    })
+
+  });
+  </script>
+  <?php endif; ?>
+  <?php if (session()->getFlashdata('gagal')): ?>
+  <script>
+  $(document).ready(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+
+    Toast.fire({
+      icon: 'error',
+      title: '<?php echo session()->getFlashdata('gagal') ?>'
+    })
+
+  });
+  </script>
+  <?php endif; ?>
 
 </body>
 </html>

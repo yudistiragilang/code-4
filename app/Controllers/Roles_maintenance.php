@@ -29,7 +29,12 @@ class Roles_maintenance extends Controller
             'role' => $this->request->getPost('roles'),
             'created_date' => date('Y-m-d H:i:s'),
         );
-        $model->saveRole($data);
+        $insert = $model->saveRole($data);
+        if($insert) {
+            session()->setFlashdata('sukses', 'Berhasil add'.$this->request->getPost('roles'));
+        } else {
+            session()->setFlashdata('gagal', 'Gagal add');
+        }
         return redirect()->to(base_url('/maintenance-roles'));
     }
  
@@ -48,11 +53,13 @@ class Roles_maintenance extends Controller
     {
         $usr = new User_model();
         $dataUser = $usr->cekRolesUsed($id);
+        /* echo $dataUser;
+        exit(); */
 
         if($dataUser > 0){
             
-            $session = \Config\Services::session($config);
-            $session->setFlashdata('gagal', '
+            //$session = \Config\Services::session($config);
+            /* session()->setFlashdata('gagal', '
                 <div class="alert alert-danger alert-dismissible show fade">
                   <div class="alert-body">
                     <button class="close" data-dismiss="alert">
@@ -61,13 +68,15 @@ class Roles_maintenance extends Controller
                     This is a danger alert.
                   </div>
                 </div>
-                ');
+                '); */
+            session()->setFlashdata('gagal', 'Gagal hapus');
             return redirect()->to(base_url('/maintenance-roles'));
 
         }else{
             
             $model = new Role_model();
             $model->deleteRole($id);
+            session()->setFlashdata('sukses', 'Berhasil hapus');
             return redirect()->to(base_url('/maintenance-roles'));
         
         }
