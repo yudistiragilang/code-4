@@ -31,9 +31,9 @@ class Roles_maintenance extends Controller
         );
         $insert = $model->saveRole($data);
         if($insert) {
-            session()->setFlashdata('sukses', 'Berhasil add'.$this->request->getPost('roles'));
+            session()->setFlashdata('sukses', 'Berhasil Tambah Role '.$this->request->getPost('roles'));
         } else {
-            session()->setFlashdata('gagal', 'Gagal add');
+            session()->setFlashdata('gagal', 'Gagal Tambah Role ! ');
         }
         return redirect()->to(base_url('/maintenance-roles'));
     }
@@ -45,7 +45,12 @@ class Roles_maintenance extends Controller
         $data = array(
             'role'  => $this->request->getPost('roles'),
         );
-        $model->updateRole($data, $id);
+        $update = $model->updateRole($data, $id);
+        if($update) {
+            session()->setFlashdata('sukses', 'Berhasil update role '.$this->request->getPost('roles'));
+        } else {
+            session()->setFlashdata('gagal', 'Gagal update role ! ');
+        }
         return redirect()->to(base_url('/maintenance-roles'));
     }
 	
@@ -58,7 +63,7 @@ class Roles_maintenance extends Controller
 
         if($dataUser > 0){
             
-            //$session = \Config\Services::session($config);
+            $session = \Config\Services::session();
             /* session()->setFlashdata('gagal', '
                 <div class="alert alert-danger alert-dismissible show fade">
                   <div class="alert-body">
@@ -69,14 +74,16 @@ class Roles_maintenance extends Controller
                   </div>
                 </div>
                 '); */
-            session()->setFlashdata('gagal', 'Gagal hapus');
+            
+            $session->setFlashdata('gagal', 'Data tidak dapat dihapus karena sudah ada transaksi ! ');
+            // session()->setFlashdata('gagal', 'Data tidak dapat dihapus karena sudah ada transaksi ! ');
             return redirect()->to(base_url('/maintenance-roles'));
 
         }else{
             
             $model = new Role_model();
             $model->deleteRole($id);
-            session()->setFlashdata('sukses', 'Berhasil hapus');
+            session()->setFlashdata('sukses', 'Data berhasil hapus');
             return redirect()->to(base_url('/maintenance-roles'));
         
         }
