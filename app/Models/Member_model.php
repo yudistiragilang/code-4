@@ -48,6 +48,16 @@ class Member_model extends Model
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     }
+
+    public function cekUserUsed($id_user)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('members');
+        $builder->select('*');
+        $builder->where('user_id', $id_user);
+        $data = $builder->countAllResults();
+        return $data;
+    }
  
 }
 

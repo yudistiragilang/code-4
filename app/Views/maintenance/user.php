@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/public/assets/css/style.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/public/assets/css/components.css">
   <link rel="shortcut icon" type="image/png" href="<?php echo base_url(); ?>/public/favicon.ico"/>
+
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/public/assets/modules/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -168,8 +170,8 @@
                   </div>
                   <div class="modal-body">
                       <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username . .">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="usr" placeholder="Username . .">
                       </div>
                       <div class="form-group">
                         <label>Role</label>
@@ -208,10 +210,10 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                      <input type="text" hidden="hidden" class="form-control" id="id" name="id" value="<?= $editUser['id']; ?>">
+                      <input type="text" hidden="hidden" class="form-control" name="id" value="<?= $editUser['id']; ?>">
                       <div class="form-group">
-                        <label for="nama">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" value="<?= $editUser['username']; ?>">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="usr" value="<?= $editUser['username']; ?>">
                       </div>
                       <div class="form-group">
                         <label>Role</label>
@@ -271,6 +273,48 @@
 
   <!-- Template JS File -->
   <script src="<?php echo base_url(); ?>/public/assets/js/scripts.js"></script>
+
+  <!-- sweetalert -->
+  <script src="<?php echo base_url(); ?>/public/assets/modules/sweetalert2/sweetalert2.min.js"></script>
+
+  <?php if (session()->getFlashdata('sukses')): ?>
+  <script>
+  $(document).ready(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: '<?php echo session()->getFlashdata('sukses') ?>'
+    })
+
+  });
+  </script>
+  <?php endif; ?>
+  <?php if (session()->getFlashdata('gagal')): ?>
+  <script>
+  $(document).ready(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+
+    Toast.fire({
+      icon: 'error',
+      title: '<?php echo session()->getFlashdata('gagal') ?>'
+    })
+
+  });
+  </script>
+  <?php endif; ?>
 
 </body>
 </html>

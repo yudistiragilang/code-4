@@ -67,6 +67,16 @@ class Members_maintenance extends Controller
         return redirect()->to(base_url('/maintenance-members'));
     }
 
+    public function cekUserUsed($id_user)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('members');
+        $builder->select('*');
+        $builder->where('user_id', $id_user);
+        $data = $builder->countAllResults();
+        return $data;
+    }
+
 }
 
 ?>

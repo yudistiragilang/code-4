@@ -7,6 +7,8 @@
  */
 
 namespace App\Controllers;
+
+use App\Models\Member_model;
 use CodeIgniter\Controller;
 use App\Models\User_model;
 use App\Models\Role_model;
@@ -30,12 +32,17 @@ class Users_maintenance extends Controller
         $model = new User_model();
         $hashPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
         $data = array(
-            'username'      => $this->request->getPost('username'),
+            'username'      => $this->request->getPost('usr'),
             'password'      => $hashPassword,
             'role_id'       => $this->request->getPost('role'),
             'created_date'  => date('Y-m-d H:i:s'),
         );
-        $model->saveUser($data);
+        $insert = $model->saveUser($data);
+        if($insert) {
+            session()->setFlashdata('sukses', 'Berhasil Tambah User '.$this->request->getPost('username'));
+        } else {
+            session()->setFlashdata('gagal', 'Gagal Tambah User ! ');
+        }
         return redirect()->to(base_url('/maintenance-users'));
     }
  
@@ -44,18 +51,35 @@ class Users_maintenance extends Controller
         $model = new User_model();
         $id = $this->request->getPost('id');
         $data = array(
-            'username'  => $this->request->getPost('username'),
+            'username'  => $this->request->getPost('usr'),
             'role_id'   => $this->request->getPost('role'),
         );
-        $model->updateUser($data, $id);
+        $updated = $model->updateUser($data, $id);
+        if($updated) {
+            session()->setFlashdata('sukses', 'Berhasil Update User '.$this->request->getPost('username'));
+        } else {
+            session()->setFlashdata('gagal', 'Gagal Update User ! ');
+        }
         return redirect()->to(base_url('/maintenance-users'));
     }
 	
 	public function delete($id)
     {
-        $model = new User_model();
-        $model->deleteUser($id);
-        return redirect()->to(base_url('/maintenance-users'));
+        $members = new Member_model();
+        $dataMember = $members->cekUserUsed($id);
+
+        if($dataMember > 0){
+            $session = \Config\Services::session();
+            $session->setFlashdata('gagal', 'Data tidak dapat dihapus karena sudah ada transaksi ! ');
+            return redirect()->to(base_url('/maintenance-users'));
+        }else{
+            $model = new User_model();
+            $deleted = $model->deleteUser($id);
+            session()->setFlashdata('sukses', 'Data berhasil hapus');
+            return redirect()->to(base_url('/maintenance-users'));
+        }
+        
+        
     }
 
 }
