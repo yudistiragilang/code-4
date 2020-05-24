@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/public/assets/css/style.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/public/assets/css/components.css">
   <link rel="shortcut icon" type="image/png" href="<?php echo base_url(); ?>/public/favicon.ico"/>
+
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/public/assets/modules/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -149,7 +151,7 @@
                     </td>
                     <td>
                       <a href="#" class="btn btn-outline-info" data-toggle="modal" data-target="#editData<?= $member['id'];?>"><i class="fas fa-edit"></i></a>
-                      <a onclick="return hapus()" href="<?= base_url(); ?>/maintenance-users-delete/<?= $member['id'];?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
+                      <a onclick="return hapus()" href="<?= base_url(); ?>/maintenance-members-delete/<?= $member['id'];?>" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
                   <?php $no++; ?>
@@ -352,6 +354,48 @@
 
   <!-- Template JS File -->
   <script src="<?php echo base_url(); ?>/public/assets/js/scripts.js"></script>
+
+  <!-- sweetalert -->
+  <script src="<?php echo base_url(); ?>/public/assets/modules/sweetalert2/sweetalert2.min.js"></script>
+
+  <?php if (session()->getFlashdata('sukses')): ?>
+  <script>
+  $(document).ready(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: '<?php echo session()->getFlashdata('sukses') ?>'
+    })
+
+  });
+  </script>
+  <?php endif; ?>
+  <?php if (session()->getFlashdata('gagal')): ?>
+  <script>
+  $(document).ready(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+
+    Toast.fire({
+      icon: 'error',
+      title: '<?php echo session()->getFlashdata('gagal') ?>'
+    })
+
+  });
+  </script>
+  <?php endif; ?>
 
 </body>
 </html>

@@ -38,7 +38,12 @@ class Members_maintenance extends Controller
             'email' => $this->request->getPost('email'),
             'user_id' => $this->request->getPost('user_id'),
         );
-        $model->saveMember($data);
+        $insert = $model->saveMember($data);
+        if($insert) {
+            session()->setFlashdata('sukses', 'Berhasil Tambah Member '.$this->request->getPost('nama'));
+        } else {
+            session()->setFlashdata('gagal', 'Gagal Tambah Member ! ');
+        }
         return redirect()->to(base_url('/maintenance-members'));
     }
  
@@ -56,14 +61,24 @@ class Members_maintenance extends Controller
             'email' => $this->request->getPost('email'),
             'user_id' => $this->request->getPost('user_id'),
         );
-        $model->updateMember($data, $id);
+        $updated = $model->updateMember($data, $id);
+        if($updated) {
+            session()->setFlashdata('sukses', 'Berhasil Update Member '.$this->request->getPost('nama'));
+        } else {
+            session()->setFlashdata('gagal', 'Gagal Update Member ! ');
+        }
         return redirect()->to(base_url('/maintenance-members'));
     }
 	
 	public function delete($id)
     {
         $model = new Member_model();
-        $model->deleteMember($id);
+        $deleted = $model->deleteMember($id);
+        if($deleted) {
+            session()->setFlashdata('sukses', 'Berhasil Hapus Member '.$this->request->getPost('nama'));
+        } else {
+            session()->setFlashdata('gagal', 'Gagal Hapus Member ! ');
+        }
         return redirect()->to(base_url('/maintenance-members'));
     }
 

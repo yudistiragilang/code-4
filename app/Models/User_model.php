@@ -73,6 +73,16 @@ class User_model extends Model
         $data = $builder->countAllResults();
         return $data;
     }
+
+    public function cekUsernameAvailable($username)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('*');
+        $builder->where('username', $username);
+        $data = $builder->countAllResults();
+        return $data;
+    }
  
 }
 

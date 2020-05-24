@@ -30,37 +30,51 @@ class Users_maintenance extends Controller
     public function save()
     {
         $model = new User_model();
-        $hashPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
-        $data = array(
-            'username'      => $this->request->getPost('usr'),
-            'password'      => $hashPassword,
-            'role_id'       => $this->request->getPost('role'),
-            'created_date'  => date('Y-m-d H:i:s'),
-        );
-        $insert = $model->saveUser($data);
-        if($insert) {
-            session()->setFlashdata('sukses', 'Berhasil Tambah User '.$this->request->getPost('username'));
-        } else {
-            session()->setFlashdata('gagal', 'Gagal Tambah User ! ');
+        $cekUsername = $model->cekUsernameAvailable($this->request->getPost('usr'));
+        if($cekUsername > 0){
+            session()->setFlashdata('gagal', 'Username '.$this->request->getPost('usr').' Sudah digunakan !');
+            return redirect()->to(base_url('/maintenance-users'));
+        }else{
+            $hashPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+            $data = array(
+                'username'      => $this->request->getPost('usr'),
+                'password'      => $hashPassword,
+                'role_id'       => $this->request->getPost('role'),
+                'created_date'  => date('Y-m-d H:i:s'),
+            );
+            $insert = $model->saveUser($data);
+            if($insert) {
+                session()->setFlashdata('sukses', 'Berhasil Tambah User '.$this->request->getPost('usr'));
+            } else {
+                session()->setFlashdata('gagal', 'Gagal Tambah User ! ');
+            }
+            return redirect()->to(base_url('/maintenance-users'));
         }
-        return redirect()->to(base_url('/maintenance-users'));
+        
     }
  
     public function update()
     {
         $model = new User_model();
-        $id = $this->request->getPost('id');
-        $data = array(
-            'username'  => $this->request->getPost('usr'),
-            'role_id'   => $this->request->getPost('role'),
-        );
-        $updated = $model->updateUser($data, $id);
-        if($updated) {
-            session()->setFlashdata('sukses', 'Berhasil Update User '.$this->request->getPost('username'));
-        } else {
-            session()->setFlashdata('gagal', 'Gagal Update User ! ');
+        $cekUsername = $model->cekUsernameAvailable($this->request->getPost('usr'));
+        if($cekUsername > 0){
+            session()->setFlashdata('gagal', 'Username '.$this->request->getPost('usr').' Sudah digunakan !');
+            return redirect()->to(base_url('/maintenance-users'));
+        }else{
+            $id = $this->request->getPost('id');
+            $data = array(
+                'username'  => $this->request->getPost('usr'),
+                'role_id'   => $this->request->getPost('role'),
+            );
+            $updated = $model->updateUser($data, $id);
+            if($updated) {
+                session()->setFlashdata('sukses', 'Berhasil Update User '.$this->request->getPost('usr'));
+            } else {
+                session()->setFlashdata('gagal', 'Gagal Update User ! ');
+            }
+            return redirect()->to(base_url('/maintenance-users'));
         }
-        return redirect()->to(base_url('/maintenance-users'));
+        
     }
 	
 	public function delete($id)
