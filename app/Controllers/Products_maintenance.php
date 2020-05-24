@@ -29,7 +29,12 @@ class Products_maintenance extends Controller
             'units' => $this->request->getPost('units'),
             'created_date' => date('Y-m-d H:i:s'),
         );
-        $model->saveProduct($data);
+        $inserted = $model->saveProduct($data);
+        if($inserted) {
+            session()->setFlashdata('sukses', 'Berhasil Tambah Product '.$this->request->getPost('stock_name'));
+        } else {
+            session()->setFlashdata('gagal', 'Gagal Tambah Product ! ');
+        }
         return redirect()->to(base_url('/maintenance-products'));
     }
  
@@ -41,14 +46,24 @@ class Products_maintenance extends Controller
             'stock_name'  => $this->request->getPost('stock_name'),
             'units'  => $this->request->getPost('units'),
         );
-        $model->updateProduct($data, $stock_id);
+        $updated = $model->updateProduct($data, $stock_id);
+        if($updated) {
+            session()->setFlashdata('sukses', 'Berhasil Update Product '.$this->request->getPost('stock_name'));
+        } else {
+            session()->setFlashdata('gagal', 'Gagal Update Product ! ');
+        }
         return redirect()->to(base_url('/maintenance-products'));
     }
 	
 	public function delete($stock_id)
     {
         $model = new Product_model();
-        $model->deleteProduct($stock_id);
+        $deleted = $model->deleteProduct($stock_id);
+        if($deleted) {
+            session()->setFlashdata('sukses', 'Berhasil Deleted Product');
+        } else {
+            session()->setFlashdata('gagal', 'Gagal Deleted Product ! ');
+        }
         return redirect()->to(base_url('/maintenance-products'));
     }
 
